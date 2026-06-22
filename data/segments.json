@@ -1,0 +1,38 @@
+[
+  {
+    "id": "genz-instagram",
+    "name": "Gen-Z",
+    "channel": "Instagram",
+    "age_band": "18-24",
+    "tone": "playful, trend-led, emoji-friendly",
+    "top_format": "social_square",
+    "blurb": "Mobile-first, scroll-stopping visuals, short punchy copy."
+  },
+  {
+    "id": "millennials-email",
+    "name": "Millennials",
+    "channel": "Email",
+    "age_band": "28-40",
+    "tone": "aspirational, benefit-led",
+    "top_format": "email_hero",
+    "blurb": "Value + quality story, responds to subject lines and preheaders."
+  },
+  {
+    "id": "genx-display",
+    "name": "Gen-X",
+    "channel": "Display",
+    "age_band": "41-55",
+    "tone": "clear, trustworthy, quality-forward",
+    "top_format": "display_banner",
+    "blurb": "Banner placements, concise value proposition."
+  },
+  {
+    "id": "professionals-social",
+    "name": "Urban Professionals",
+    "channel": "Facebook",
+    "age_band": "30-45",
+    "tone": "polished, lifestyle",
+    "top_format": "social_square",
+    "blurb": "Weekend/resort positioning, premium feel."
+  }
+]

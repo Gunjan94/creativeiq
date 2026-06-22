@@ -1,0 +1,142 @@
+[
+  {
+    "id": "linen-resort-shirt",
+    "name": "Linen Resort Shirt",
+    "category": "tops",
+    "price": 89,
+    "description": "Breathable European linen, relaxed fit, mother-of-pearl buttons.",
+    "tags": [
+      "linen",
+      "summer",
+      "unisex",
+      "resort"
+    ],
+    "image_url": "/data/catalog/photos/linen-resort-shirt.jpg"
+  },
+  {
+    "id": "straw-tote-bag",
+    "name": "Woven Straw Tote",
+    "category": "bags",
+    "price": 64,
+    "description": "Hand-woven seagrass tote with leather handles, roomy beach-day carry.",
+    "tags": [
+      "straw",
+      "beach",
+      "accessory",
+      "summer"
+    ],
+    "image_url": "/data/catalog/photos/straw-tote-bag.jpg"
+  },
+  {
+    "id": "silk-scarf",
+    "name": "Coastal Silk Scarf",
+    "category": "accessories",
+    "price": 72,
+    "description": "Lightweight mulberry silk in a hand-painted tidal print.",
+    "tags": [
+      "silk",
+      "print",
+      "premium",
+      "accessory"
+    ],
+    "image_url": "/data/catalog/photos/silk-scarf.jpg"
+  },
+  {
+    "id": "linen-wide-trouser",
+    "name": "Wide-Leg Linen Trouser",
+    "category": "bottoms",
+    "price": 98,
+    "description": "Fluid wide-leg cut in washed linen, elastic comfort waist.",
+    "tags": [
+      "linen",
+      "relaxed",
+      "unisex",
+      "resort"
+    ],
+    "image_url": "/data/catalog/photos/linen-wide-trouser.jpg"
+  },
+  {
+    "id": "cotton-sundress",
+    "name": "Sunwashed Cotton Dress",
+    "category": "dresses",
+    "price": 119,
+    "description": "Airy tiered cotton midi with adjustable straps and side pockets.",
+    "tags": [
+      "cotton",
+      "dress",
+      "summer",
+      "womens"
+    ],
+    "image_url": "/data/catalog/photos/cotton-sundress.jpg"
+  },
+  {
+    "id": "leather-sandals",
+    "name": "Handmade Leather Sandals",
+    "category": "footwear",
+    "price": 84,
+    "description": "Vegetable-tanned leather slides, cushioned cork footbed.",
+    "tags": [
+      "leather",
+      "footwear",
+      "handmade",
+      "unisex"
+    ],
+    "image_url": "/data/catalog/photos/leather-sandals.jpg"
+  },
+  {
+    "id": "panama-hat",
+    "name": "Brisa Panama Hat",
+    "category": "accessories",
+    "price": 58,
+    "description": "Hand-blocked toquilla straw with grosgrain band, packable brim.",
+    "tags": [
+      "straw",
+      "hat",
+      "sun",
+      "accessory"
+    ],
+    "image_url": "/data/catalog/photos/panama-hat.jpg"
+  },
+  {
+    "id": "swim-shorts",
+    "name": "Tide Swim Shorts",
+    "category": "swim",
+    "price": 52,
+    "description": "Quick-dry recycled fabric, tailored mid-length, drawcord waist.",
+    "tags": [
+      "swim",
+      "recycled",
+      "mens",
+      "beach"
+    ],
+    "image_url": "/data/catalog/photos/swim-shorts.jpg"
+  },
+  {
+    "id": "knit-polo",
+    "name": "Coastal Knit Polo",
+    "category": "tops",
+    "price": 76,
+    "description": "Breathable cotton-silk knit polo with a soft ribbed collar.",
+    "tags": [
+      "knit",
+      "polo",
+      "smart-casual",
+      "mens"
+    ],
+    "image_url": "/data/catalog/photos/knit-polo.jpg"
+  },
+  {
+    "id": "linen-jumpsuit",
+    "name": "Harbour Linen Jumpsuit",
+    "category": "dresses",
+    "price": 138,
+    "description": "Belted wide-leg linen jumpsuit with utility pockets.",
+    "tags": [
+      "linen",
+      "jumpsuit",
+      "premium",
+      "womens"
+    ],
+    "image_url": "/data/catalog/photos/linen-jumpsuit.jpg"
+  }
+]

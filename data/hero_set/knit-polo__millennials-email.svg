@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3F6B6B"/><stop offset="1" stop-color="#E8DFD2"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3F6B6B" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3F6B6B" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="998" cy="201" r="216" fill="#F6F2EA" opacity="0.20"/>
+  <circle cx="256" cy="129" r="100" fill="#E8DFD2" opacity="0.18"/>
+  <rect x="0" y="324" width="1280" height="396" fill="url(#scrim)"/>
+  <text x="50" y="101" font-family="Georgia, serif" font-size="21"
+        fill="#E8DFD2" letter-spacing="4" opacity="0.85">LUMEN &amp; COAST</text>
+<text x="50" y="374" font-family="Georgia, serif" font-size="51" fill="#E8DFD2" font-weight="700">Coastal Knit Polo: quality you&#x27;ll feel</text>
+<text x="50" y="448" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#E8DFD2" opacity="0.92">Breathable cotton-silk knit polo with a soft ribbed collar. Designed for the way you</text>
+<text x="50" y="485" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#E8DFD2" opacity="0.92">actually live — and made to last.</text>
+<rect x="50" y="538" rx="24" width="267" height="59" fill="#C97B5A"/>
+<text x="183" y="578" font-family="Helvetica, Arial, sans-serif" font-size="27" fill="#F6F2EA" text-anchor="middle" font-weight="600">Discover more</text>
+<text x="1230" y="101" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#E8DFD2" text-anchor="end" opacity="0.8">Email · email hero</text>
+</svg>

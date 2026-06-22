@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5C8A8A"/><stop offset="1" stop-color="#E8DFD2"/>
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5C8A8A" stop-opacity="0"/>
+      <stop offset="1" stop-color="#5C8A8A" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="798" cy="286" r="307" fill="#F6F2EA" opacity="0.20"/>
+  <circle cx="204" cy="184" r="143" fill="#F6F2EA" opacity="0.18"/>
+  <rect x="0" y="460" width="1024" height="563" fill="url(#scrim)"/>
+  <text x="71" y="144" font-family="Georgia, serif" font-size="30"
+        fill="#F6F2EA" letter-spacing="4" opacity="0.85">LUMEN &amp; COAST</text>
+<text x="71" y="532" font-family="Georgia, serif" font-size="73" fill="#F6F2EA" font-weight="700">Effortless, always</text>
+<text x="71" y="639" font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#F6F2EA" opacity="0.92">The sunwashed cotton dress — airy tiered cotton</text>
+<text x="71" y="693" font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#F6F2EA" opacity="0.92">midi with adjustable straps and side pockets..</text>
+<text x="71" y="747" font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#F6F2EA" opacity="0.92">Quietly confident.</text>
+<rect x="71" y="825" rx="34" width="447" height="83" fill="#C97B5A"/>
+<text x="294" y="882" font-family="Helvetica, Arial, sans-serif" font-size="38" fill="#F6F2EA" text-anchor="middle" font-weight="600">Explore the edit</text>
+<text x="953" y="144" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#F6F2EA" text-anchor="end" opacity="0.8">Facebook · social square</text>
+</svg>

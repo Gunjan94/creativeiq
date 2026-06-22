@@ -1,0 +1,20 @@
+{
+  "name": "creativeiq-infra",
+  "version": "1.0.0",
+  "description": "CreativeIQ AWS CDK stack (DEFERRED — stub for cloud deploy; prototype runs locally).",
+  "bin": { "creativeiq": "bin/app.ts" },
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "aws-cdk": "^2.150.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "@types/node": "^20.14.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.150.0",
+    "constructs": "^10.3.0"
+  }
+}
