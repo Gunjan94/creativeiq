@@ -1,151 +1,133 @@
-# CreativeIQ — Executive Pitch & Walkthrough (read-through)
+# CreativeIQ — Walkthrough Voice-Over Script (for the screen recording)
 
-> **⚠️ The recording is a human task** (screen + voice-over) — this is the read-through for it.
+> **Voice-over script for a recorded screen walkthrough — not a live meeting.** Narrate to the viewer (the
+> AWS panel) *about* the customer; don't address anyone in the room. Read the **quoted lines**;
+> **[bracketed bold]** = on-screen action.
 
-**The pitch, not a feature tour — two audiences.** You are an AWS Innovation Hub engineer presenting
-*CreativeIQ* to two leaders of a mid-sized SE-Asia fashion retailer ("Lumen & Coast"):
+**What it is:** *CreativeIQ* — an AI retail ad studio for a SE-Asia fashion retailer ("Lumen & Coast"). It
+helps two leaders at once — the **CMO** (speed-to-trend, on-brand creative) and the **CEO/CFO** (cost and
+media ROI) — so the walkthrough covers both.
 
-- **The CMO / Head of Marketing** — owns campaign output and brand; wants speed-to-trend, never missing
-  a window (11.11, 12.12, Hari Raya, year-end), and on-brand consistency.
-- **The CEO / CFO** — owns the P&L; cares about cost per campaign, marketing ROI, and the annual money.
+**Length:** ~8:30, inside the cap. **Arc:** the problem → create live → the money → "is it real?" → close.
 
-**Length:** ~8:30, inside the 10-min cap. **Arc:** shared problem → CMO (create live) → CEO/CFO (the
-money) → "is it real?" → why now / ask.
-
-> **HONESTY NOTE (current build).** Three things are genuinely real and you can say so: **(1)** the
-> ad **image is AI-generated** at request time by a keyless text-to-image model (the UI labels it
-> "AI-generated image"); **(2)** the **CTR prediction** is a transparent model over the retailer's real
-> 160-campaign history (auditable via the drill-down); **(3)** the **copy** is model-written. Caveat:
-> the live image model is a **keyless open model, not Amazon Bedrock Nova Canvas** in this build — so say
-> **"AI-generated"**, not "Nova Canvas," unless `USE_BEDROCK=1` image-gen is wired. (On a fresh combo the
-> image takes a few seconds; cached hero combos are instant.)
+> **HONESTY NOTE.** Three things are genuinely real and you can say so on camera: the ad **image is
+> AI-generated** at request time (the UI labels it "AI-generated image"); the **CTR prediction** is a real
+> model over the retailer's 160-campaign history (auditable via the drill-down); the **copy** is
+> model-written. Caveat: the live image model is a **keyless open model, not Bedrock Nova Canvas**, unless
+> `USE_BEDROCK=1` — so say "AI-generated," not "Nova Canvas."
 
 > **Pre-flight:** full-screen, **light theme**, open on **Studio** with "Linen Resort Shirt" + "Gen-Z ·
-> Instagram" pre-selected but **not yet generated**. Campaigns tab ready. Pre-warm the hero combo once so
-> the image is cached and instant on camera.
+> Instagram" pre-selected but not generated; Campaigns tab ready. Pre-warm the hero combo so the image is
+> instant on camera.
 
 ---
 
-## 0:00 – 0:50 — The shared problem
+## 0:00 – 0:50 — The problem
 **[On screen: Studio, idle. Before/after panel showing "Agency: 3–5 days".]**
 
-> "Thanks for the time — and it's the two of you on purpose. You" — *to the CMO* — "run forty to sixty
-> campaigns a month with a five-person team, and every one starts with a brief to an agency and a
-> three-to-five-day wait. By the time the creative lands, the trend window has often closed. And you" —
-> *to the CEO* — "pay agency rates for that, on every campaign, while years of performance data, the full
-> catalog, and your customer segments sit unused. You're guessing — slowly, and at a cost. Let me show you
-> what it looks like when your own data drives the creative, in real time."
+> "This is CreativeIQ. Picture a mid-sized fashion retailer running forty to sixty campaigns a month with a
+> five-person team. Today, when they want creative, they write a brief, send it to an agency, and wait
+> three to five days — and by the time it's back, the trend window has often closed. Meanwhile they're
+> sitting on years of campaign-performance data, a full catalog, and customer segments — none of which
+> touches the creative. They're guessing, slowly, and paying agency rates to arrive late. Here's what it
+> looks like when their own data drives the creative in real time — and it pays off two ways: for the
+> marketing team, and for the CEO."
 
 ---
 
-## 0:50 – 4:15 — For the CMO: create, live
+## 0:50 – 4:15 — Creating, live (the marketing win)
 
-### The data you're not using  (~0:50 – 1:40)
+### The data sitting unused  (~0:50 – 1:40)
 **[Click the Campaigns tab — the CTR heatmap (segment × format) + the 160-row history.]**
-> "First, this is *your* data — a hundred and sixty past campaigns. This heatmap is the whole story on one
-> screen: click-through rate by audience and format. Gen-Z on Instagram lights up on social; email rewards
-> a different format entirely. Your book averages about two-point-seven percent. You already *own* these
-> patterns — today they sit in a spreadsheet nobody opens."
+> "First, the retailer's own data — a hundred and sixty past campaigns. This heatmap is the whole story on
+> one screen: click-through rate by audience and format. Gen-Z on Instagram lights up on social; email
+> rewards a different format. The book averages about two-point-seven percent. Those patterns already
+> exist — today they sit in a spreadsheet nobody opens."
 
 ### Brief to campaign, live  (~1:40 – 2:50)
 **[Back to Studio. Click Generate.]**
-> "Linen resort shirt, Gen-Z on Instagram. One click."
+> "A linen resort shirt, targeting Gen-Z on Instagram — one click. The copy writes itself, on-brand, and
+> the image is generated by AI on the spot, in the right format for the channel."
 
-**[Copy streams in; the AI-generated image renders; format = social square.]**
-> "The copy writes itself — on-brand, in your voice — and the image is **generated by AI**, on the spot,
-> in the right format for the channel. But the part a CMO cares about most is this —"
+**[The PredictedCtrBadge lands: "4.8% predicted CTR · +56% vs segment avg · 40 campaigns".]**
+> "But the part that matters most is this badge — four-point-eight percent predicted click-through,
+> fifty-six percent above this segment's average — and it's not invented."
 
-**[PredictedCtrBadge lands: "4.8% predicted CTR · +56% vs segment avg · 40 campaigns".]**
-> "— four-point-eight percent predicted click-through, **fifty-six percent above** this segment's average.
-> And it's not invented."
-
-**[Click "Why this number?" — the drill-down opens: factor multipliers + the comparable campaigns list.]**
+**[Click "Why this number?" — the drill-down opens.]**
 > "Here's the proof: the segment average, adjusted by what historically wins — format, image style, copy
 > tone, each with its multiplier — and the actual comparable campaigns it's computed from. The model didn't
-> guess 4.8%; here are the campaigns behind it. That's the difference between guessing and knowing, before
-> you spend a dollar on media."
+> guess 4.8 percent; these are the campaigns behind it. That's the difference between guessing and knowing,
+> before a dollar of media is spent."
 
-### Switch the audience — re-target live  (~2:50 – 3:35)
+### Re-target a different audience, live  (~2:50 – 3:35)
 **[Click segment chip → "Millennials · Email." Don't re-pick the product.]**
-> "Same product, different audience — Millennials on email. I'm not touching the product."
-
-**[Copy rewrites longer/benefit-led; format flips to email hero; image re-generates; badge updates.]**
-> "Copy rewrote itself — longer, benefit-led. Format flipped to an email hero. The image re-generated for
-> the new audience, and the prediction updated, because it's a different segment with different history.
-> Change the input, the whole thing re-rates live."
+> "Same product, different audience — Millennials on email — without touching the product. The copy rewrote
+> itself, longer and benefit-led; the format flipped to an email hero; the image re-generated; and the
+> prediction updated, because it's a different audience with different history. Change the input and the
+> whole thing re-rates live."
 
 ### "Is it real?"  (~3:35 – 4:15)
 **[Pick a different product + segment for a third distinct result.]**
-> "One more, to be sure — different product, different segment, a different on-brand creative and a
-> different grounded number. This is a real pipeline reading your real data, not two pre-baked ads."
+> "One more — a different product, a different segment, a different on-brand creative and a different
+> grounded number. This is a real pipeline reading real data, not two pre-baked ads."
 
 ---
 
-## 4:15 – 6:00 — For the CEO & CFO: the money
-**[Pan to the Before/After panel — the per-campaign cards, then the annual roll-up band.]**
+## 4:15 – 6:00 — The money (the CEO win)
+**[Pan to the Before/After panel — per-campaign cards, then the annual roll-up band.]**
 
-> "Now to you" — *to the CEO*. "Three numbers. Speed: a three-to-five-day agency round-trip becomes under
-> a minute — that's catching the trend window instead of missing it. Cost —"
+> "Now the business case. Three numbers a CEO cares about. Speed: a three-to-five-day agency round-trip
+> becomes under a minute — that's catching the trend window instead of missing it. Cost: at this retailer's
+> volume, roughly six hundred campaign concepts a year, that's on the order of a million-plus dollars of
+> agency spend a year that becomes near-zero marginal cost — capital that gets redeployed into media and
+> testing. And hit-rate: every creative ships with a prediction grounded in the retailer's own history, so
+> media goes behind the variants most likely to convert, not the ones they find out about afterward."
 
-**[Point to the annual roll-up: ≈$1.2M/yr agency vs ≈$0 with CreativeIQ.]**
-> "— at your volume, roughly six hundred campaign concepts a year, that's on the order of **a million-plus
-> dollars of agency spend a year** that becomes near-zero marginal cost — capital you redeploy into media
-> and testing. And hit-rate: every creative ships with a prediction grounded in your own history, so media
-> goes behind the variants most likely to convert, not the ones you find out about afterward."
-
-> "You're not buying a creative tool. You're buying speed-to-trend and a higher return on every media
-> dollar — funded by data you already own and already pay to collect."
+> "So it's not a creative tool — it's speed-to-trend and a higher return on every media dollar, funded by
+> data they already own."
 
 ---
 
-## 6:00 – 7:15 — Why it's low-risk (architecture, for execs)
-**[ARCHITECTURE.md diagram, or stay on the app.]**
+## 6:00 – 7:15 — How it's built
+**[Architecture diagram, or stay on the app.]**
 
-> "What does it take to build? A clean AWS stack — a web front end your team uses, Python serverless behind
-> a Lambda Function URL, one-command deploy, near-zero idle cost — in fact it's **already live** on a public
-> URL. The image and copy are AI-generated; the image runs on a keyless model today and swaps to Amazon
-> Bedrock Nova Canvas with one flag. And — the important part — the *prediction* is deliberately **not** an
-> AI black box. It's a transparent model over your real campaign history, defensible and audit-able via that
-> drill-down, so it's safe to put a media budget behind. Synthetic data here; no exposure. Built in days; a
-> pilot on your real catalog is weeks, not quarters."
+> "It's a clean AWS stack — a web front end, Python serverless behind a Lambda Function URL, near-zero idle
+> cost — and it's already deployed and live. The image and copy are AI-generated; the image runs on a
+> keyless model today and swaps to Amazon Bedrock Nova Canvas with one flag. And the prediction is
+> deliberately not an AI black box — it's a transparent model over the real campaign history, auditable via
+> that drill-down, so a media budget can sit behind it. Synthetic data throughout. Built in days."
 
 ---
 
-## 7:15 – 8:30 — Close + the ask
+## 7:15 – 8:30 — Close
 **[Back to Studio with the last creative + grounded badge on screen.]**
 
-> "So here's what we've done. For marketing: on-brand creative in under a minute instead of a week, and
-> live re-targeting for any segment — you never miss a window again. For the CEO: a million-plus in agency
-> spend compressed to near-zero marginal cost, and every creative carrying a CTR prediction from your own
-> data, so media spend gets smarter."
-
-> "The ask: let us run CreativeIQ on a slice of your *real* catalog and campaign history — generate for your
-> actual segments, with predictions grounded in your actual performance, and measure the lift against your
-> current agency workflow. If it does what this prototype does, you've got the case to roll it out. Your
-> competitors are already moving at this speed; the data to catch them is in your own systems."
+> "So in this walkthrough, CreativeIQ took data the retailer already owns and turned it into three things:
+> on-brand creative in under a minute instead of a week; a click-through prediction grounded in their own
+> campaigns; and live re-targeting for any segment. For the marketing team, the agency cycle is gone; for
+> the CEO, a million-plus in spend is compressed and every dollar of media gets smarter. The data to move
+> at this speed is already in their systems. That's CreativeIQ."
 
 **[Hold on the hero creative + badge, then stop recording.]**
 
 ---
 
 ## Click-cue cheat sheet
-1. **Open** on Studio (Linen Resort Shirt + Gen-Z · Instagram, not generated) — don't interact during 0:00.
-2. **Campaigns tab:** the **CTR heatmap** (segment × format) + 160-campaign history, book CTR ~2.7%.
-3. **Studio → Generate:** copy streams → **AI-generated image** → predicted-CTR badge (~4.8%, +56%, 40 campaigns) → **"Why this number?"** drill-down (factor multipliers + comparable campaigns).
-4. **Segment chip → Millennials · Email:** copy/format/image/prediction all re-render live.
-5. **(Optional) third product+segment** — prove it's not pre-baked.
-6. **Before/After panel:** per-campaign seconds + **annual roll-up (≈$1.2M/yr saved)**.
-7. **Architecture** → **Close:** Studio creative + badge, pilot ask, hold, stop. Record in **light**.
+1. **Open** on Studio (Linen Resort Shirt + Gen-Z · Instagram, not generated).
+2. **Campaigns tab:** the **CTR heatmap** + 160-campaign history, book CTR ~2.7%.
+3. **Studio → Generate:** copy streams → **AI-generated image** → CTR badge (~4.8%, +56%, 40 campaigns) → **"Why this number?"** drill-down.
+4. **Segment chip → Millennials · Email:** copy/format/image/prediction re-render live.
+5. **(Optional) third product+segment.**
+6. **Before/After panel:** per-campaign seconds + **annual roll-up (≈$1.2M/yr)**.
+7. **Architecture + close.** Record in **light theme**.
 
-## Numbers cheat sheet (verified live — should match screen)
-- **Campaign history:** **160** campaigns, book avg CTR **~2.68%**, segment×format heatmap (best = Gen-Z social ~3.5%).
-- **Gen-Z · Instagram (hero):** **~4.8%** predicted CTR, **+56%** vs segment avg, grounded in **40** campaigns; drill-down shows the comparable rows.
+## Numbers cheat sheet (verified live)
+- **Campaign history:** **160** campaigns, book avg CTR **~2.68%**, heatmap best = Gen-Z social ~3.5%.
+- **Gen-Z · Instagram (hero):** **~4.8%** predicted CTR, **+56%** vs segment avg, **40** comparable campaigns.
 - **Before/after:** agency **3–5 days** → **under a minute**; annual ≈ **$1.2M** agency → ≈$0 marginal.
 
-## Delivery notes
-- **Address both leaders out loud** ("to the CMO…" / "to the CEO…"). The **"Why this number?" drill-down**
-  is the credibility beat — it makes the prediction auditable; lean on it.
-- **Image honesty (updated):** the image **is** AI-generated live (keyless model) — say "AI-generated,"
-  not "Nova Canvas," unless Bedrock image-gen is configured. Pre-warm the hero combo so it's instant.
-- **Stakes early, ask late.** Open on the cost of slowness; close on a concrete pilot.
+## Delivery notes — recorded voice-over, not a live pitch
+- **Narrate to the viewer, third person about the retailer** — never "you, the CMO/CEO."
+- **The "Why this number?" drill-down is the credibility beat** — it makes the prediction auditable; let it land.
+- **Image honesty:** say "AI-generated," not "Nova Canvas," on the keyless path. Pre-warm the hero combo so it's instant.
 - Hard cap **10:00**; aim **~8:30**. Rehearse the first and last 30 seconds.
