@@ -1,3 +1,12 @@
+> **Current-state addendum (2026-06-22).** This spec predates the 2026-06-22 upgrade and is kept as build
+> history. Authoritative current docs: **README.md**, **ARCHITECTURE.md**, **DEMO_SCRIPT.md**. What changed:
+> **image generation is now genuinely live** (keyless text-to-image — no longer a "preview"), plus a **CTR
+> transparency drill-down** ("Why this number?" → `GET /comparable`), a **segment×format CTR heatmap**
+> (`GET /analytics`), an **annual money roll-up** (≈$1.2M/yr), and **two-audience** framing (CMO / CEO·CFO).
+> A full AWS deploy path was built (Mangum Lambda + CDK). **Deployed & live:** https://d33y5855vpqrlk.cloudfront.net.
+
+---
+
 # PROTOTYPE.md — CreativeIQ (Scenario B: AI-Powered Retail Ad Studio)
 
 > The spec. What we're building, why it wins, and exactly which features carry the demo.

@@ -1,3 +1,11 @@
+> **Current-state addendum (2026-06-22).** Kept as build history. For the current build see **README.md**,
+> **ARCHITECTURE.md**, **DEMO_SCRIPT.md**. Net change: **live keyless image generation** (no longer a
+> "preview"), **CTR transparency drill-down** (`/comparable`), **segment×format heatmap** (`/analytics`),
+> **annual money roll-up**, two-audience framing, and a full AWS deploy path. **Live:**
+> https://d33y5855vpqrlk.cloudfront.net.
+
+---
+
 # BUILD_NOTES.md — CreativeIQ (Scenario B)
 
 What was actually built, how to run it, what is real vs mocked, and verification evidence.

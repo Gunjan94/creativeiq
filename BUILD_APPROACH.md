@@ -1,3 +1,12 @@
+> **Current-state addendum (2026-06-22).** This build write-up predates the 2026-06-22 upgrade. Authoritative
+> current docs: **README.md**, **ARCHITECTURE.md**, **DEMO_SCRIPT.md**. What changed: **image generation is now
+> genuinely live** (keyless text-to-image — no longer a "preview"); a **CTR transparency drill-down** (`GET
+> /comparable`); a **segment×format CTR heatmap** (`GET /analytics`); an **annual money roll-up** (≈$1.2M/yr);
+> **two-audience** framing; and a full AWS deploy path (Mangum Lambda + CDK). **Deployed & live:**
+> https://d33y5855vpqrlk.cloudfront.net.
+
+---
+
 # BUILD_APPROACH.md — CreativeIQ
 
 > Deliverable (3): build approach & considerations (1–2 pages). Pre-filled where determinable; `[fill after building]` marks spots needing real results. Scenario B: AI-Powered Retail Ad Studio.

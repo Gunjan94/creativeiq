@@ -1,63 +1,69 @@
-# ARCHITECTURE.md — CreativeIQ
+# CreativeIQ — Architecture Overview
 
-> Deliverable (2): ~1-page architecture overview — diagram, data flow, and why these choices. Scenario B: AI-Powered Retail Ad Studio.
+**AI retail ad studio for a SE-Asia fashion retailer ("Lumen & Coast").** Two audiences: the **CMO**
+(speed-to-trend, on-brand creative) and the **CEO/CFO** (cost + media ROI). The CTR prediction is a real,
+transparent model over the retailer's own campaign history; image + copy are AI-generated; the analytics
+and money views make it all auditable.
 
-## System diagram
-
+## Diagram
 ```
-   ┌───────────────────────────────────────────────────────────────────┐
-   │  BROWSER (showroom touchscreen)                                     │
-   │  React + TypeScript + Vite + Tailwind                               │
-   │  StudioView: GeneratePanel · CreativeCard · SegmentSwitcher         │
-   │              PredictedCtrBadge · BeforeAfterPanel                    │
-   │  CampaignsView: 160-row performance history (the evidence base)     │
-   │  theme.ts: light/dark via CSS variables (default light)             │
-   └───────────────┬───────────────────────────────┬───────────────────┘
-                   │ HTTPS / SSE (streamed copy)    │ GET catalog/segments/campaigns
-                   ▼                                ▼
-   ┌───────────────────────────────────────────────────────────────────┐
-   │  Amazon API Gateway (HTTP API)                                      │
-   └───────────────┬───────────────────────────────┬───────────────────┘
-                   ▼                                ▼
-   ┌──────────────────────────┐   ┌──────────────────────────────────────┐
-   │  Lambda: /generate        │   │  Lambda: /predict /segments /catalog │
-   │  (Python 3.12)            │   │           /campaigns  (Python 3.12)   │
-   │   1. load product+segment │   │   perf_model.py over campaign         │
-   │   2. ask perf_model for   │   │   history → predicted CTR + lift +    │
-   │      best style/tone/fmt  │   │   "based on N campaigns";             │
-   │   3. stream copy (Claude) │   │   /campaigns serves those same rows   │
-   │   4. render image (Nova)  │   │   (book CTR, top performers) →         │
-   │      [preview offline]    │   │   makes the prediction auditable      │
-   │   5. cache/preview fallbk │   └───────────────┬──────────────────────┘
-   └───┬───────────┬───────────┘                   │
-       │           │                               │
-       ▼           ▼                               ▼
- ┌──────────┐  ┌──────────────────────────┐   ┌─────────────────────────────┐
- │ Amazon   │  │ Amazon Bedrock            │   │ Synthetic data (bundled JSON │
- │   S3     │  │  • Claude Sonnet 4.6      │   │ + S3): catalog, segments,    │
- │ creatives│  │    (copy, streamed)       │   │ campaign_history, hero_set    │
- │ + hero   │  │  • Nova Canvas (image —   │   └─────────────────────────────┘
- │   set    │  │    NOT RUN; preview only) │
- │ +preview │  └──────────────────────────┘
- └──────────┘
-            ── all provisioned by AWS CDK (one-command deploy, serverless, ~$0 idle) ──
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  BROWSER  (React 18 + TypeScript + Vite + Tailwind)                             │
+│  ┌────────────────────────┐ ┌──────────────┐ ┌──────────────┐ ┌─────────────┐  │
+│  │ Studio (HERO)          │ │ Campaigns    │ │ Segments     │ │ Catalog     │  │
+│  │  • product × segment   │ │  • CTR       │ │              │ │             │  │
+│  │    → Generate          │ │    heatmap   │ │              │ │             │  │
+│  │  • AI image + streamed │ │   (seg×fmt)  │ │              │ │             │  │
+│  │    copy + CTR badge    │ │  • 160-row   │ │              │ │             │  │
+│  │  • "Why this number?"  │ │    history   │ │              │ │             │  │
+│  │    drill-down          │ │              │ │              │ │             │  │
+│  │  • Before/After + ≈$1.2M│ └──────┬───────┘ └──────────────┘ └─────────────┘  │
+│  └──────────┬─────────────┘        │                                            │
+└─────────────┼──────────────────────┼────────────────────────────────────────────┘
+   /generate (SSE)   /predict     /analytics   /comparable    /campaigns /segments /catalog
+        │               │             │            │
+        ▼               ▼             ▼            ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  AWS Lambda  (Python 3.12, FastAPI via Mangum, Function URL)  — app.py          │
+│   ┌──────────────────┐  ┌───────────────────┐  ┌───────────────────────────┐   │
+│   │ core/perf_model  │  │ core/imagegen     │  │ handlers/generate + copy   │   │
+│   │  • CTR predict   │  │  • keyless text-  │  │  • streams copy (LLM/Claude)│   │
+│   │    over 160      │  │    to-image (Flux)│  │  • orchestrates image+copy │   │
+│   │    campaigns     │  │  • DIRECT mode on │  │ handlers/analytics         │   │
+│   │  • seg×fmt×style │  │    Lambda (returns│  │  • seg×fmt CTR matrix      │   │
+│   │    ×tone factors │  │    image URL,     │  │  • comparable campaigns    │   │
+│   │  • grounded, not │  │    no disk write) │  │    (the prediction's       │   │
+│   │    invented      │  └─────────┬─────────┘  │    grounding, auditable)   │   │
+│   └───────┬──────────┘            │            └─────────────┬──────────────┘   │
+│           ▼                       ▼                          ▼                  │
+│   data/campaign_history.json   image.pollinations.ai    Amazon Bedrock (opt):   │
+│   (160 synthetic)   data/catalog, segments, generated/  Claude copy + Nova Canvas│
+│                     (served at /data)                   image when USE_BEDROCK=1 │
+└──────────────────────────────────────────────────────────────────────────────┘
+   Region ap-southeast-1.  Frontend → private S3 + CloudFront; /data images via the Function URL
+   (frontend built with VITE_ASSET_BASE = the Function URL).  CDK (infra/cdk/), LIVE. ~$0 idle.
 ```
 
-## Data flow (request → response)
-
-1. The panel picks a **product** and **segment** in StudioView and hits Generate. The browser calls `POST /generate`.
-2. The `/generate` Lambda loads the product (catalog) and segment profile, then asks `perf_model.py` which **image style, copy tone, and format** historically perform best **for that segment** — so the creative is data-informed, not generic.
-3. The Lambda builds a **brand-token-constrained, segment-conditioned** prompt and **streams copy from Claude (Sonnet 4.6)** back over SSE — copy appears within ~1s. Concurrently it attempts an **on-brand image**: with `USE_BEDROCK=1` + creds it calls **Nova Canvas** and stores the result in **S3**; offline (the state in this environment — creds expired) it serves a pre-composed on-brand **SVG preview**, not a live render. The CreativeCard badge labels which (`live Bedrock` vs `on-brand preview`).
-4. In parallel the browser calls `POST /predict`, which runs the transparent feature model over `campaign_history.json` (segment × format × style × tone → CTR) and returns a **predicted CTR, lift vs the segment average, and the number of comparable campaigns** — the grounding for the on-screen badge.
-5. The browser renders the streamed copy, fades in the image (S3 render or preview), shows the format tag and the **predicted-CTR badge**, and updates the **before/after panel** with the real elapsed time. Switching the segment re-fires steps 2–5 for the same product, so copy, format, and prediction visibly re-render.
-6. If image gen is slow or Bedrock errors, `/generate` serves the **pre-generated hero-set** creative (S3 or local) — the demo path never breaks.
-7. The **Campaigns** view calls `GET /campaigns`, which returns recent rows from `campaign_history.json` plus book-level rollups (160 campaigns, book avg CTR ~2.68%, top-quartile performers flagged). These are the **same rows `/predict` is computed from** — exposing them makes the predicted-CTR badge auditable rather than asserted. `theme.ts` applies the active light/dark palette as CSS variables that Tailwind and the page background read.
+## Data flow
+1. **Studio → Generate** (`POST /generate`, SSE): `perf_model.best_features_for_segment` mines the
+   historically best format/style/tone for the segment → `copywriter`/Claude streams the copy →
+   `imagegen` produces a **net-new AI image** (keyless Flux text-to-image; cached hero combos instant) →
+   `perf_model.predict` returns a **grounded CTR** (segment avg × format/style/tone factors, clamped),
+   with `based_on_n_campaigns`. Switching the segment re-runs all three live.
+2. **"Why this number?"** → `GET /comparable?segment_id&format&image_style&copy_tone` returns the real
+   campaigns the prediction is computed from (auditable, not invented) + their avg CTR.
+3. **Campaigns** → `GET /analytics` returns the **segment × format CTR matrix** (heatmap) + book avg
+   2.68% + best combo (Gen-Z social 3.51%); `GET /campaigns` the 160-row history.
+4. **Before/After** → per-campaign (3–5 days → seconds) + an annual roll-up (≈$1.2M/yr agency → ≈$0).
+5. **Lambda image handling (DIRECT mode):** a cache-miss returns the **keyless image URL** for the browser
+   to load (no writes to the read-only Lambda FS); the 12 bundled hero combos serve from `/data`.
+6. **Degradation:** offline copy template; cached hero set; the prediction is real local compute either way.
 
 ## Why these choices
-
-- **Serverless (Lambda + API Gateway + CDK):** one-command deploy, ~$0 idle, nothing to babysit during a 5-day build — time goes to the demo path, not ops. CDK gives the judges a clean clone-to-run.
-- **Amazon Bedrock for both copy and image:** one managed AI surface, one IAM permission (`InvokeModel`), no key management. **Claude Sonnet 4.6** is the speed/quality sweet spot for short ad copy and streams smoothly (the first-10-seconds impression); **Nova Canvas** is AWS-native, fast, and brand-controllable via prompt. State the reasoning: text and image are *different* model families combined thoughtfully, which is exactly the "AI + cloud + data, orchestration over service count" the brief rewards.
-- **Transparent perf model (not an LLM) for prediction:** the prediction must be *grounded in the historical dataset*, defensible, and stable when judges change inputs — a feature-based aggregate over real rows does that and explains itself ("+24% vs segment avg, 18 campaigns"). An LLM guess would fail the "not invented" bar.
-- **S3 assets + pre-generated hero set:** image-gen latency/quality is the #1 demo risk; caching keyed by product×segment plus stream-text-while-image-renders turns that risk into a non-event.
-- **Synthetic data only:** no real customer data, no secrets in the repo — and we engineer clear, defensible patterns into the history so the prediction visibly reflects the data.
-- **Region:** Singapore (`ap-southeast-1`) for the APJ demo; fall back to `us-east-1` if Bedrock image-model access is gated (verified Day 1).
+- **Transparent CTR model, not an AI black box** — the number is grounded in real history and *auditable*
+  via the drill-down, so a media budget can sit behind it. This is the load-bearing "it's real" proof.
+- **Keyless image gen by default, Bedrock Nova Canvas optional** — genuinely AI-generated images with zero
+  AWS setup; `USE_BEDROCK=1` swaps in Nova Canvas + Claude.
+- **DIRECT image mode on Lambda** — avoids writing to the read-only task FS; bundled hero combos stay instant.
+- **Two-audience IA** — CMO (create/speed) vs CEO/CFO (annual money) clearly separated.
+- **Serverless Lambda + Mangum + CDK** — already live; ~$0 idle. Synthetic data only.

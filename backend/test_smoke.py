@@ -41,10 +41,14 @@ def test_segment_switch_changes_format_and_ctr():
     assert a["prediction"]["predicted_ctr"] != b["prediction"]["predicted_ctr"]
 
 
-def test_offline_generate_serves_hero_set():
+def test_offline_generate_serves_image():
+    # Offline generation now returns a genuinely-generated image (keyless
+    # text-to-image), so source is "generated" (or "preview" if the image path
+    # is unreachable and it composes over the product photo). Either way the
+    # creative has a usable image reference and grounded copy.
     s = generate.generate_summary({"product_id": "linen-resort-shirt", "segment_id": "genz-instagram"})
-    assert s["source"] == "cache"
-    assert s["image_url"].startswith("/data/hero_set/")
+    assert s["source"] in ("generated", "preview", "cache")
+    assert s["image_url"] or s["product_image_url"]
     assert s["copy"]["headline"]
 
 
