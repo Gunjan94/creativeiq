@@ -11,12 +11,12 @@ cd "$(dirname "$0")/.."                      # scenario root
 ROOT="$(pwd)"
 
 PROFILE="${AWS_PROFILE:-gunjan-aws}"
-ACCOUNT_EXPECTED="<APP_ACCOUNT>"
+ACCOUNT_EXPECTED="${DEPLOY_ACCOUNT:-}"
 REGION="ap-southeast-1"
 
 echo "==> 0/5  Verifying credentials point to the PERSONAL account"
 ACCT=$(aws sts get-caller-identity --profile "$PROFILE" --query Account --output text)
-if [ "$ACCT" != "$ACCOUNT_EXPECTED" ]; then
+if [ -n "$ACCOUNT_EXPECTED" ] && [ "$ACCT" != "$ACCOUNT_EXPECTED" ]; then
   echo "ABORT: profile '$PROFILE' resolves to account $ACCT, expected $ACCOUNT_EXPECTED."
   echo "       Refusing to deploy so your work account is never touched."
   exit 1
@@ -50,7 +50,7 @@ cd infra/cdk
 ./.venv/bin/pip install --quiet -r requirements.txt
 export PATH="$PWD/.venv/bin:$PATH"
 ( cd "$ROOT/frontend" && npm install >/dev/null 2>&1 || true && npm run build >/dev/null )
-cdk bootstrap "aws://$ACCOUNT_EXPECTED/$REGION" >/dev/null 2>&1 || cdk bootstrap "aws://$ACCOUNT_EXPECTED/$REGION"
+cdk bootstrap "aws://${ACCOUNT_EXPECTED:-$ACCT}/$REGION" >/dev/null 2>&1 || cdk bootstrap "aws://${ACCOUNT_EXPECTED:-$ACCT}/$REGION"
 cdk deploy --require-approval never
 
 echo "==> 3/5  Reading the Function URL"

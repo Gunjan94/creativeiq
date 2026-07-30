@@ -1,6 +1,6 @@
 """CDK app entry — CreativeIQ.
 
-Pinned to the PERSONAL account <APP_ACCOUNT> / ap-southeast-1, with a guardrail
+Pinned to the account set via DEPLOY_ACCOUNT / ap-southeast-1, with a guardrail
 that aborts if the resolved credentials point anywhere else.
 """
 import os
@@ -10,7 +10,7 @@ import aws_cdk as cdk
 
 from creative_iq_stack import CreativeIqStack
 
-ACCOUNT = "<APP_ACCOUNT>"
+ACCOUNT = os.environ.get("DEPLOY_ACCOUNT") or os.environ.get("CDK_DEFAULT_ACCOUNT")
 REGION = "ap-southeast-1"
 
 resolved = os.environ.get("CDK_DEFAULT_ACCOUNT")

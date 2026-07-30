@@ -22,3 +22,13 @@ infra/cdk/.venv/
 # the app serves them via /data and scripts/deploy.sh bundles them, so the repo
 # stays self-contained and deployable from a fresh clone. New runtime images on
 # Lambda use DIRECT mode (no writes), so nothing un-tracked accumulates here.
+
+# --- Security hardening (added during repo audit) ---
+.env
+.env.local
+.env.*.local
+backend/.env.local
+*.pem
+*_accessKeys.csv
+aws_credentials*
+Submission_for_*/
